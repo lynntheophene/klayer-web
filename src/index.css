@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+  --bg-color: #FFF9F0;
+  --primary-color: #FF4D4D;
+  --secondary-color: #1A1A2E;
+  --accent-color: #FFD700;
+  --text-color: #1A1A2E;
+  --card-bg: #FFFFFF;
+  --border-width: 3px;
+  --border-radius: 16px;
+  --shadow-offset: 6px;
+  
+  --font-heading: 'Fraunces', serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .retro-heading {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.retro-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Sticker/Retro Card Style */
+.retro-card {
+  background: var(--card-bg);
+  border: var(--border-width) solid var(--text-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--text-color);
+  padding: 1.5rem;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.retro-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: calc(var(--shadow-offset) + 3px) calc(var(--shadow-offset) + 3px) 0px 0px var(--text-color);
+}
+
+/* Retro Button */
+.retro-button {
+  background: var(--primary-color);
+  color: #fff;
+  border: var(--border-width) solid var(--text-color);
+  border-radius: 12px;
+  padding: 0.8rem 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px 0px var(--text-color);
+  transition: all 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.retro-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px var(--text-color);
+}
+
+.retro-button.secondary {
+  background: var(--accent-color);
+  color: var(--text-color);
+}
+
+/* Layout Utilities */
+.section-padding {
+  padding: 5rem 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
