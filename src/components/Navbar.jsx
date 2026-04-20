@@ -1,11 +1,22 @@
 import React from 'react';
-import { ShoppingCart, Menu, X, User } from 'lucide-react';
+import { ShoppingCart, Menu, X, User, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = ({ cartCount, onOpenCart, onOpenAuth }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
 
   return (
     <nav style={{
@@ -44,14 +55,48 @@ const Navbar = ({ cartCount, onOpenCart, onOpenAuth }) => {
           <Link to="/shop" style={{ textDecoration: 'none', color: 'var(--text-color)', fontWeight: 600 }}>Shop</Link>
           <Link to="/custom" style={{ textDecoration: 'none', color: 'var(--text-color)', fontWeight: 600 }}>Custom</Link>
 
-          <button
-            className="retro-button secondary"
-            style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
-            onClick={onOpenAuth}
-          >
-            <User size={18} />
-            <span>JOIN THE LAB</span>
-          </button>
+          {user ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: 'var(--accent-color)',
+                padding: '0.4rem 0.8rem',
+                borderRadius: '12px',
+                border: '2px solid var(--text-color)',
+                fontWeight: 800,
+                fontSize: '0.8rem'
+              }}>
+                <User size={16} />
+                <span>{user.displayName || user.phoneNumber || 'LAB MEMBER'}</span>
+              </div>
+              <button
+                onClick={handleLogout}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'var(--text-color)',
+                  opacity: 0.6,
+                  display: 'flex',
+                  alignItems: 'center'
+                }}
+                title="Logout"
+              >
+                <LogOut size={18} />
+              </button>
+            </div>
+          ) : (
+            <button
+              className="retro-button secondary"
+              style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
+              onClick={onOpenAuth}
+            >
+              <User size={18} />
+              <span>JOIN THE LAB</span>
+            </button>
+          )}
 
           <button
             className="retro-button"

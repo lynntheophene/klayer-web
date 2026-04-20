@@ -10,7 +10,7 @@
   --border-width: 3px;
   --border-radius: 16px;
   --shadow-offset: 6px;
-  
+
   --font-heading: 'Fraunces', serif;
   --font-body: 'Outfit', sans-serif;
 }
@@ -29,7 +29,11 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, .retro-heading {
+h1,
+h2,
+h3,
+h4,
+.retro-heading {
   font-family: var(--font-heading);
   text-transform: uppercase;
   letter-spacing: -1px;
@@ -99,18 +103,48 @@ h1, h2, h3, h4, .retro-heading {
 }
 
 @media (min-width: 768px) {
-  .grid-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3 { grid-template-columns: repeat(3, 1fr); }
-  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* Animations */
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
